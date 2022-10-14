@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Mainlightcategory = () => {
     const location = useLocation()
+
     const [prev, setPrev] = useState([])
     const notify = (p, msg) => p ? toast.success(msg) : toast.error(msg);
 
@@ -30,7 +31,7 @@ const Mainlightcategory = () => {
                 "Content-Type": "multipart/form-data",
             },
         }).then((res) => {
-            notify(1, "Updated succesfulyy..")
+            notify(1, "Updated successfully...")
         }).catch((err) => {
             console.log(err)
             notify(0, "oops something went wrong..")

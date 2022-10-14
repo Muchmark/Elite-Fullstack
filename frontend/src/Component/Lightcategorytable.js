@@ -19,7 +19,7 @@ const Lightcategorytable = () => {
     })
   }, [])
 
-  const deleteCategory=(id)=>{
+  const deleteCategory = (id) => {
     // axios.get('http://localhost:3032/admincrud/getlightcategory').then((res) => {
     //   console.log(res.data)
     //   setData(res.data)
@@ -31,7 +31,7 @@ const Lightcategorytable = () => {
   }
 
   return (
-    <div className='admin w-3/4 mt-40'>
+    <div className='admin w-3/4 mt-12'>
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg order-2">
         <p className="mt-1 mb-3 text-center text-lg text-gray-500 dark:text-gray-400 uppercase font-bold">Active Main Light Categories</p>
 
@@ -39,7 +39,10 @@ const Lightcategorytable = () => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="py-3 px-6">
-                Sr. No.
+                sr. no.
+              </th>
+              <th scope="col" className="py-3 px-6">
+                series id
               </th>
               <th scope="col" className="py-3 px-6">
                 Main Light Image
@@ -58,8 +61,10 @@ const Lightcategorytable = () => {
 
           <tbody>
             {data.map((value, index) => {
-              return (<tr id={index} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-
+              return (<tr key={index} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {index+1}
+                </th>
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {value._id}
                 </th>
@@ -74,15 +79,15 @@ const Lightcategorytable = () => {
 
                 <td className="py-4 px-6">
                   <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                    <img src={delIcon} alt="Image" onClick={()=>{
+                    <img src={delIcon} alt="Image" onClick={() => {
                       deleteCategory(value._id)
-                    }}/>
+                    }} />
                   </a>
                 </td>
 
                 <td className="py-4 px-6">
-                  <Link to="/updatemainlightcategory" state={{id:value._id}} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                    <img src={editIcon} alt="Image"  />
+                  <Link to="/updatemainlightcategory" state={{ id: value._id }} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    <img src={editIcon} alt="Image" />
                   </Link>
                 </td>
 

@@ -12,6 +12,7 @@ import Addproducts from './Component/Addproducts';
 import Productstable from './Component/Productstable';
 import Homepage from './Component/Homepage';
 import Updatemainlightcategory from './Component/Updatemainlightcategory'
+import Updatelightseries from './Component/Updatelightseries'
 // import Footer from './Component/Footer';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path='/productstable' element={<Productstable />} />
           <Route path='/home' element={<Homepage />} />
           <Route path='/updatemainlightcategory' element={<Updatemainlightcategory />} />
+          <Route path='/updatelightseries' element={<Updatelightseries />} />
         </Routes>
       </BrowserRouter>
     </div>

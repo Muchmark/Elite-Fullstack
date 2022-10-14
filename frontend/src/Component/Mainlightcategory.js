@@ -27,7 +27,7 @@ const Mainlightcategory = () => {
   return (
     <div className='admin w-3/4'>
       <ToastContainer position="bottom-left" hideProgressBar="true" autoClose="6000" />
-      <div className="form mt-32">
+      <div className="form mt-24">
         <div className="w-full px-10 overflow-hidden bg-white rounded-lg border-2 shadow-lg dark:bg-gray-800">
           <div className="px-6 py-4">
             <p className="mt-1 text-center text-lg text-gray-500 dark:text-gray-400 uppercase font-bold">Add Main Light Categoory</p>
@@ -46,6 +46,7 @@ const Mainlightcategory = () => {
               <div className="flex items-center justify-between mt-6">
                 <button type="submit" className="px-4 py-2 leading-5 text-white transition-colors duration-300 transform bg-blue-700 rounded hover:bg-blue-600 focus:outline-none">Submit</button>
               </div>
+              
             </form>
           </div>
         </div>
