@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Mainlightcategory = () => {
+  const notify = (p, msg) => p ? toast.success(msg) : toast.error(msg);
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -14,10 +15,12 @@ const Mainlightcategory = () => {
         "Content-Type": "multipart/form-data",
       },
     }).then((res) => {
-      console.log(res)
+      notify(1,"main light category added succesfull..")
+      
 
     }).catch((err) => {
-      console.log(err)
+     // console.log(err)
+     notify(0,"main light category not added..")
 
     })
     e.target.name.value = "";

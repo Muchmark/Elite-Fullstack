@@ -3,7 +3,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import delIcon from '../icons/bin.png'
+
+import delIconWhite from '../icons/trash.png'
+
 
 const Addproducts = () => {
 
@@ -26,14 +28,37 @@ const Addproducts = () => {
 
 
   const handleSubmit = (e) => {
-    // const formdata = new FormData(e.target)
-    // const data = Object.fromEntries(formdata.entries())
+    // Sending data request to backend 
+    e.preventDefault();
+    const formdata = new FormData(e.target)
+    const data = Object.fromEntries(formdata.entries())
 
-    // //console.log(data)
+    // Whatever data received from dynamic inputs for light parameters + all form data received after submit. we are send as payload
+    const payload = { ...data, "info": value }
 
-    // e.target.series.value = ""
-    // e.target.name.value = ""
-    // e.target.productimage.value = ""
+    // console.log(payload)
+    axios.post('http://localhost:3032/admincrud/addproduct', payload, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }).then((res)=>{
+      notify(1,"Product Descirption Added Successfully..")
+    }).catch((err)=>{
+      notify(0, "Oops..Something went wrong..")
+    })
+
+    e.target.series_name.value = ""
+    e.target.product_name.value = ""
+    e.target.model_no.value = ""
+    e.target.product_description.value = ""
+    e.target.youtube.value = ""
+    e.target.news.value = ""
+    e.target.file1.value = ""
+    e.target.file2.value = ""
+    e.target.file3.value = ""
+    e.target.file4.value = ""
+    e.target.pdffile.value = ""
+    setValue([])
   }
 
   //remove the item from all buckect
@@ -61,8 +86,8 @@ const Addproducts = () => {
             <form onSubmit={handleSubmit}>
 
               <div className="w-full mt-4">
-                <label htmlFor="mainlight"><b>Light Series:</b> </label>
-                <select name="mainlight" id="mainlight" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300">
+                <label htmlFor="series_name"><b>Light Series:</b> </label>
+                <select name="series_name" id="series_name" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300">
                   <option value=""> -- Select Light Series --</option>
                   {category.map((value, index) => {
                     return (<option key={index} value={value.series}>{value.series}</option>);
@@ -72,8 +97,8 @@ const Addproducts = () => {
               </div>
 
               <div className="w-full mt-4">
-                <label htmlFor="name"><b>Product Name:</b></label>
-                <input type="text" name='name' placeholder="Product Name" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
+                <label htmlFor="product_name"><b>Product Name:</b></label>
+                <input type="text" name='product_name' placeholder="Product Name" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
               </div>
 
               <div className="w-full mt-4">
@@ -82,20 +107,39 @@ const Addproducts = () => {
               </div>
 
               <div className="w-full mt-4">
-                <label htmlFor="productimage"><b>Upload Product Images: </b></label> <br /> <br />
-                <label htmlFor="productimage">1. Front View Product Images:</label>
-                <input type="file" name='productimage' className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
-                <label htmlFor="productimage">2. Rear View Product Images:</label>
-                <input type="file" name='productimage' className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
-                <label htmlFor="productimage">3. Right Side View Product Images:</label>
-                <input type="file" name='productimage' className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
-                <label htmlFor="productimage">4. Left Side View Product Images:</label>
-                <input type="file" name='productimage' className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
+                <label htmlFor="file1"><b>Upload Product Images: </b></label> <br /> <br />
+
+                <label htmlFor="file1">1. Front View Product Images:</label>
+                <input type="file" name='file1' className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
+
+                <label htmlFor="file2">2. Rear View Product Images:</label>
+                <input type="file" name='file2' className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
+
+                <label htmlFor="file3">3. Right Side View Product Images:</label>
+                <input type="file" name='file3' className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
+
+                <label htmlFor="file4">4. Left Side View Product Images:</label>
+                <input type="file" name='file4' className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
               </div>
 
               <div className="w-full mt-4">
-                <label htmlFor="name"><b>Product Description:</b></label>
-                <textarea name='name' placeholder="Product Description" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
+                <label htmlFor="product_description"><b>Product Description:</b></label>
+                <textarea name='product_description' placeholder="Product Description" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
+              </div>
+
+              <div className="w-full mt-4">
+                <label htmlFor="pdffile"><b>Downloadable pdf Data:</b></label>
+                <input type="file" name='pdffile' placeholder="PDF" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
+              </div>
+
+              <div className="w-full mt-4">
+                <label htmlFor="youtube"><b>YouTube Video Link:</b></label>
+                <input type="text" name='youtube' placeholder="YouTube Video Link" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
+              </div>
+
+              <div className="w-full mt-4">
+                <label htmlFor="news"><b>News Data:</b></label>
+                <textarea name='news' placeholder="News Content" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" />
               </div>
 
               <h1 className=" mt-12 mb-4 text-lg"> <b> Add Product Parameters</b></h1>
@@ -130,7 +174,7 @@ const Addproducts = () => {
                     <div key={idx} className="relative bg-blue-600 text-white p-4 rounded-lg">
                       <div className=' gap-12'>
                         <span className='text-lg font-bold capitalize'>{val.title}: </span>
-                        <span onClick={() => { removeItem(idx); }} > <img src={delIcon} alt="" className='absolute right-2 top-2'/> </span>
+                        <span onClick={() => { removeItem(idx); }} > <img src={delIconWhite} alt="" className='absolute right-2 top-2'/> </span>
                         <br />
                         <div className='flex flex-col'>
                           {val.desc.split(',').map((data, index) => {
@@ -152,7 +196,8 @@ const Addproducts = () => {
               </div>
 
               <div className="flex items-center justify-between mt-6">
-                <button type="submit" className="px-4 py-2 leading-5 text-white transition-colors duration-300 transform bg-blue-700 rounded hover:bg-blue-600 focus:outline-none">Submit</button>
+                {/* <input type="submit" value="Submit Now" className="px-4 py-2 leading-5 text-white transition-colors duration-300 transform bg-blue-700 rounded hover:bg-blue-600 focus:outline-none"/> */}
+                <button type="submit" className="px-4 py-2 leading-5 text-white transition-colors duration-300 transform bg-blue-700 rounded hover:bg-blue-600 focus:outline-none" >Submit</button>
               </div>
 
             </form>

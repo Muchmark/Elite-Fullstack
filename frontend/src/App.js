@@ -13,6 +13,7 @@ import Productstable from './Component/Productstable';
 import Homepage from './Component/Homepage';
 import Updatemainlightcategory from './Component/Updatemainlightcategory'
 import Updatelightseries from './Component/Updatelightseries'
+import Updateproduct from "./Component/Updateproduct"
 // import Footer from './Component/Footer';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
     <div className="App flex">
       <BrowserRouter>
         <Sidebars />
-       
+
         <Routes>
           <Route path="/" index element={<Dashboard />} />
           <Route path='/createadmin' element={<Createadmin />} />
@@ -34,6 +35,7 @@ function App() {
           <Route path='/home' element={<Homepage />} />
           <Route path='/updatemainlightcategory' element={<Updatemainlightcategory />} />
           <Route path='/updatelightseries' element={<Updatelightseries />} />
+          <Route path='/updateproduct' element={<Updateproduct />} />
         </Routes>
       </BrowserRouter>
     </div>
